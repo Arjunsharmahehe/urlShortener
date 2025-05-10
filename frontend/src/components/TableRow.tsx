@@ -1,20 +1,23 @@
 import { Copy, Link, Trash } from "lucide-react";
 import { useUrlContext } from "../context/urlContext";
 import type { UrlResponse } from "../dummyData";
+import { useAlertContext } from "../context/alertContext";
 
 export default function TableRow({ url, i }: { url: UrlResponse, i: number }) {
 
     const { baseUrl, setShortUrl } = useUrlContext()
+    const { handleShowError, handleShowSuccess } = useAlertContext()
 
     const handleCopy = (url: string) => {
         const full_url = baseUrl + url
         navigator.clipboard.writeText(full_url)
             .then(() => {
-                console.log("URL copied to clipboard:", full_url);
+                handleShowSuccess("Copied successfully! " + full_url)
             }
             )
             .catch((error) => {
                 console.error("Error copying URL to clipboard:", error);
+                handleShowError("Error copying URL to clipboard")
             }
             );
     }
@@ -31,17 +34,16 @@ export default function TableRow({ url, i }: { url: UrlResponse, i: number }) {
         })
             .then((response) => {
                 if (response.ok) {
-                    console.log("URL deleted successfully");
+                    handleShowSuccess("Deleted successfully!")
                     setShortUrl("Deleted " + id)
                 } else {
-                    console.error("Error deleting URL");
-                    window.alert("Error deleting URL")
+                    handleShowError("Internal server error")
                 }
             }
             )
             .catch((error) => {
                 console.error("Error deleting URL:", error);
-                window.alert("Error deleting URL: " + error)
+                handleShowError("Error deleting URL")
             }
             );
     }

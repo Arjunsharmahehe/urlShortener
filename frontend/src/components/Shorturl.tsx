@@ -1,18 +1,25 @@
 import { Copy } from "lucide-react"
 import { useUrlContext } from "../context/urlContext"
+import { useAlertContext } from "../context/alertContext"
 
 export default function Shorturl() {
 
     const { shortUrl, baseUrl } = useUrlContext()
+    const { handleShowError, handleShowSuccess } = useAlertContext()
 
     const handleCopy = () => {
         navigator.clipboard.writeText(baseUrl + shortUrl)
             .then(() => {
-                console.log("URL copied to clipboard:", baseUrl + shortUrl);
+                handleShowSuccess("Copied successfully! " + baseUrl + shortUrl)
             })
             .catch((error) => {
                 console.error("Error copying URL to clipboard:", error);
+                handleShowError("Error copying URL to clipboard")
             });
+    }
+
+    if (shortUrl === "") {
+        return <p className="text-neutral-600 text-lg">Short URL will appear here</p>
     }
 
     return (

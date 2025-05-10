@@ -1,9 +1,11 @@
 import React from "react";
 import { useUrlContext } from "../context/urlContext";
+import { useAlertContext } from "../context/alertContext";
 
 export default function Input() {
     
     const { originalUrl, setOriginalUrl, baseUrl , setShortUrl} = useUrlContext()
+    const { handleShowError, handleShowSuccess } = useAlertContext()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -17,15 +19,17 @@ export default function Input() {
                 body: JSON.stringify(body)
             })
             const data = await response.json()
-            setShortUrl(data.short_url)
-            console.log(data)
 
             if (!response.ok){
-                window.alert("Error: " + data.detail)
+                handleShowError(data.detail)
+                setShortUrl("")
+            } else {
+                setShortUrl(data.short_url)
+                handleShowSuccess("URL generated successfully! Short URL: " + baseUrl + data.short_url)
             }
 
         } catch (error) {
-            window.alert("Error: " + error)
+            handleShowError("An error occurred while generating the URL. Please try again.")
         }
     }
         

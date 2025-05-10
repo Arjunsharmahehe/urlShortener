@@ -28,7 +28,7 @@ export const UrlProvider: React.FC<React.PropsWithChildren> = ({ children }) => 
     
     const baseUrl = "http://127.0.0.1:8000/"
     const [originalUrl, setOriginalUrl] = useState<string>("");
-    const [shortUrl, setShortUrl] = useState<ShortURL>("Create short url");
+    const [shortUrl, setShortUrl] = useState<ShortURL>("");
     
     useEffect(() => {
         async function fetchList(){
