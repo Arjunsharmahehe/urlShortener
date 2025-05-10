@@ -6,7 +6,7 @@ This project is a full-stack URL shortener application. It consists of:
 2.  **Frontend**: A React application (built with Vite and managed by pnpm) that provides a user interface to interact with the URL shortener service.
 
 ## Showcase
-[![Thumbnail](./showcase/thumbnail.png)](./showcase/urlShortener_showcase.mp4)
+[![Thumbnail](./showcase/thumbnail.png)](https://youtu.be/uFi1hp9uP6A)
 
 ## Directory Structure
 
