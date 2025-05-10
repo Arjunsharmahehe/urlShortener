@@ -47,16 +47,16 @@ export default function Alert({
   // Determine styles based on type
   const styles = {
     success: {
-      bg: 'bg-green-50',
+      bg: 'bg-green-950',
       border: 'border-green-500',
-      text: 'text-green-800',
-      icon: <CheckCircle className="h-5 w-5 text-green-500" />,
+      text: 'text-green-300',
+      icon: <CheckCircle className="size-6 text-green-300" />,
     },
     error: {
-      bg: 'bg-red-50',
+      bg: 'bg-red-950',
       border: 'border-red-500',
-      text: 'text-red-800',
-      icon: <AlertCircle className="h-5 w-5 text-red-500" />,
+      text: 'text-red-200',
+      icon: <AlertCircle className="size-6 text-red-200" />,
     }
   };
 
@@ -89,7 +89,7 @@ export default function Alert({
           </div>
           <button
             type="button"
-            className={`inline-flex rounded-md p-1.5 ${currentStyle.text} hover:bg-opacity-20 hover:bg-gray-200 focus:outline-none`}
+            className={`inline-flex rounded-md p-1.5 ${currentStyle.text} hover:bg-opacity-20 hover:bg-black/10 focus:outline-none`}
             onClick={handleClose}
           >
             <X className="h-5 w-5" />

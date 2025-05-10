@@ -94,9 +94,9 @@ def get_all_urls(skip: int = 0, limit: int = 100, db: Session = Depends(database
 
 @app.delete("/urls/delete")
 def delete_short_code(item: schemas.DeleteItemBody, db: Session = Depends(database.get_db)):
-    """
-    Retrieve a shortened URL entry by its short code.
-    """
+    """Delete a shortened URL entry by its ID.
+    - **id**: The ID of the URL entry to delete."""
+    
     try:
         rows_affected = db.query(models.URL).filter(models.URL.id == item.id).delete(synchronize_session=False)
         db.commit()
